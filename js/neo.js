@@ -100,6 +100,9 @@ $("button").click(function(){
     //alert($(this).attr("id")); 
     var id = $(this).attr("id");
     if (ais.indexOf(id)>=0){
+        if(id=="bigdl" && way=="conda"){
+            set_way("pip");
+        };
         set_ai(id);
     }
 
