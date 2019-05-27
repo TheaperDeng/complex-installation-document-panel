@@ -36,21 +36,36 @@ function refresh_cmd(){
                 cmd = "pip install mxnet-mkl";
             else
                 cmd = "pip install mxnet-mkl==1.5.0b20190517";
-        }        
+        }
+        if(way=="source"){
+            if(os=="linux")
+                cmd="To build from source, refer to the <a href=https://mxnet.incubator.apache.org/versions/master/install/ubuntu_setup.html>MXNet Ubuntu installation guide</a>.";
+            if(os=="win")
+                cmd="To build from source, refer to the <a href=https://mxnet.incubator.apache.org/versions/master/install/windows_setup.html>MXNet Windows installation guide</a>.<br>";
+            if(os=="mac")
+                cmd="To build from source, refer to the <a href=https://mxnet.incubator.apache.org/versions/master/install/osx_setup.html>MXNet macOS installation guide</a>.<br>";
+            
+        }
+            
     }
     if(ai=="bigdl"){
-        cmd = "pip install bigdl";        
+        cmd = "";
+        if(way=="pip")
+            cmd = "pip install bigdl";
+        
+        if(way=="source")
+            cmd = "https://bigdl-project.github.io/0.8.0/#ScalaUserGuide/install-build-src/"
     }
 
     if(ai=="pytorch"){
         if(way=="pip"){
             if(release=="stable"){
-                cmd = "pip3 install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp37-cp37m-linux_x86_64.whl \n\
+                cmd = "pip3 install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp37-cp37m-linux_x86_64.whl<br>\
 pip3 install torchvision";
                 }
             else
             {
-                cmd = "pip install numpy torchvision_nightly \n\
+                cmd = "pip install numpy torchvision_nightly <br>\
 pip install torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html";
             }
         }
@@ -73,7 +88,7 @@ pip install torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_
         }
     }
 
-    $("#cmd").text(cmd);
+    $("#cmd").html(cmd);
 }
 
 function set_ai(id){
