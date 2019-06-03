@@ -29,7 +29,41 @@ function refresh_cmd(){
     set_color(release);
     set_color(way);
 
-    var cmd = "";
+    var cmd = "NA";
+    if(ai=="caffe"){
+        if(way=="conda"){
+            if(os=="linux")
+                cmd="conda install caffe -c intel";
+        }
+        if(way=="source"){
+            if(os=="linux")
+                cmd = "To build from source, refer to the <a href=https://github.com/intel/caffe/wiki/Install-Intel-Caffe>Intel Caffe linux installation guide</a>";
+            if(os=="win")
+                cmd="There is an unofficial Windows port of Caffe at <a href=https://github.com/niuzhiheng/caffe>niuzhiheng/caffe:windows</a>."
+        }
+            
+    }
+    
+    if(ai=="tensorflow"){
+        if(way=="pip"){
+            if(os=="linux")
+                cmd = "pip install intel-tensorflow";
+        }
+        if(way=="conda"){
+            if(os=="mac")
+                cmd = "conda install tensorflow -c anaconda<br>conda install tensorflow";
+            if(os=="linux")
+                cmd="conda install tensorflow -c intel<br>conda install tensorflow  -c anaconda<br>conda install tensorflow";
+            if(os=="win")
+                cmd = "conda install tensorflow-mkl -c anaconda<br>conda install tensorflow-mkl";
+        }
+        if(way=="source"){
+            if(os=="linux")
+                cmd = "To build from source, refer to the <a href=https://software.intel.com/en-us/articles/intel-optimization-for-tensorflow-installation-guide#Build_source_linux>Tensorflow linux installation guide</a>";
+        }
+            
+    }
+    
     if(ai=="mxnet"){
         if(way=="pip"){
             if(release=="stable")
@@ -49,7 +83,6 @@ function refresh_cmd(){
             
     }
     if(ai=="bigdl"){
-        cmd = "";
         if(way=="pip")
             cmd = "pip install bigdl";
         
@@ -115,9 +148,6 @@ $("button").click(function(){
     //alert($(this).attr("id")); 
     var id = $(this).attr("id");
     if (ais.indexOf(id)>=0){
-        if(id=="bigdl" && way=="conda"){
-            set_way("pip");
-        };
         set_ai(id);
     }
 
@@ -129,7 +159,6 @@ $("button").click(function(){
     }
 
     if (ways.indexOf(id)>=0){
-        if(ai=="bigdl" && id=="conda") return;
         set_way(id);
     }
 });
