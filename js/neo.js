@@ -1,11 +1,15 @@
-var ais = ["mxnet", "bigdl", "tensorflow", "caffe", "pytorch"];
+var ais = ["pytorch", "tensorflow", "prophet", "pmdarima"];
 var releases=["stable", "nightly"]
-var oss=["linux", "win", "mac"];
-var ways=["conda", "pip", "source"]
+var oss=["linux", "win"];
+var ways=["pypi", "docker"];
+var hardwares=["singlenode", "cluster"];
+var automls=["automlyes", "automlno"]
 var ai="pytorch";
 var os="linux";
-var release="stable";
-var way="pip";
+var release="nightly";
+var way="pypi";
+var hardware="singlenode";
+var automl="automlno"
 
 
 function set_color(id){
@@ -14,7 +18,6 @@ function set_color(id){
 
 function reset_color(list){
     for (btn in list){
-        //console.log(list[btn]);
         $("#"+list[btn]).css("background-color","buttonface");
     }
 }
@@ -24,103 +27,121 @@ function refresh_cmd(){
     reset_color(oss);
     reset_color(releases);
     reset_color(ways);
+    reset_color(hardwares);
+    reset_color(automls);
     set_color(ai);
     set_color(os);
     set_color(release);
     set_color(way);
+    set_color(hardware);
+    set_color(automl);
 
     var cmd = "NA";
-    if(ai=="caffe"){
-        if(way=="conda"){
-            if(os=="linux")
-                cmd="conda install caffe -c intel";
+    if(ai=="pytorch"){
+        if(way=="docker"){
+            cmd="Please refer to docker installation guide.";
+        }else{
+            if(os=="win"){
+                cmd="Please refer to windows installation guide.";
+            }else{
+                if(way=="pypi"){
+                    if(hardware=="singlenode"){
+                        if(automl=="automlno"){
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[pytorch]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[pytorch]"
+                        }else{
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[pytorch, automl]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[pytorch, automl]"
+                        }
+                    }
+                    if(hardware=="cluster"){
+                        if(automl=="automlno"){
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[pytorch, distributed]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[pytorch, distributed]"
+                        }else{
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[pytorch, distributed, automl]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[pytorch, distributed, automl]"
+                        }
+                    }
+                }
+            }
         }
-        if(way=="source"){
-            if(os=="linux")
-                cmd = "To build from source, refer to the <a href=https://github.com/intel/caffe/wiki/Install-Intel-Caffe>Intel Caffe linux installation guide</a>";
-            if(os=="win")
-                cmd="There is an unofficial Windows port of Caffe at <a href=https://github.com/niuzhiheng/caffe>niuzhiheng/caffe:windows</a>."
-        }
-            
     }
     
     if(ai=="tensorflow"){
-        if(way=="pip"){
-            if(os=="linux")
-                cmd = "pip install intel-tensorflow";
-        }
-        if(way=="conda"){
-            if(os=="mac")
-                cmd = "conda install tensorflow -c anaconda<br>conda install tensorflow";
-            if(os=="linux")
-                cmd="conda install tensorflow -c intel<br>conda install tensorflow  -c anaconda<br>conda install tensorflow";
-            if(os=="win")
-                cmd = "conda install tensorflow-mkl -c anaconda<br>conda install tensorflow-mkl";
-        }
-        if(way=="source"){
-            if(os=="linux")
-                cmd = "To build from source, refer to the <a href=https://software.intel.com/en-us/articles/intel-optimization-for-tensorflow-installation-guide#Build_source_linux>Tensorflow linux installation guide</a>";
-        }
-            
-    }
-    
-    if(ai=="mxnet"){
-        if(way=="pip"){
-            if(release=="stable")
-                cmd = "pip install mxnet-mkl";
-            else
-                cmd = "pip install mxnet-mkl==1.5.0b20190517";
-        }
-        if(way=="source"){
-            if(os=="linux")
-                cmd="To build from source, refer to the <a href=https://mxnet.incubator.apache.org/versions/master/install/ubuntu_setup.html>MXNet Ubuntu installation guide</a>.";
-            if(os=="win")
-                cmd="To build from source, refer to the <a href=https://mxnet.incubator.apache.org/versions/master/install/windows_setup.html>MXNet Windows installation guide</a>.<br>";
-            if(os=="mac")
-                cmd="To build from source, refer to the <a href=https://mxnet.incubator.apache.org/versions/master/install/osx_setup.html>MXNet macOS installation guide</a>.<br>";
-            
-        }
-            
-    }
-    if(ai=="bigdl"){
-        if(way=="pip")
-            cmd = "pip install bigdl";
-        
-        if(way=="source")
-            cmd = "https://bigdl-project.github.io/0.8.0/#ScalaUserGuide/install-build-src/"
-    }
-
-    if(ai=="pytorch"){
-        if(way=="pip"){
-            if(release=="stable"){
-                cmd = "pip3 install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp37-cp37m-linux_x86_64.whl<br>\
-pip3 install torchvision";
+        if(way=="docker"){
+            cmd="Please refer to docker installation guide.";
+        }else{
+            if(os=="win"){
+                cmd="Please refer to windows installation guide.";
+            }else{
+                if(way=="pypi"){
+                    if(hardware=="singlenode"){
+                        if(automl=="automlno"){
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[tensorflow]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[tensorflow]"
+                        }else{
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[tensorflow, automl]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[tensorflow, automl]"
+                        }
+                    }
+                    if(hardware=="cluster"){
+                        if(automl=="automlno"){
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[tensorflow, distributed]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[tensorflow, distributed]"
+                        }else{
+                            if(release=="nightly")
+                                cmd="pip install --pre --upgrade bigdl-chronos[tensorflow, distributed, automl]"
+                            if(release=="stable")
+                                cmd="pip install bigdl-chronos[tensorflow, distributed, automl]"
+                        }
+                    }
                 }
-            else
-            {
-                cmd = "pip install numpy torchvision_nightly <br>\
-pip install torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html";
             }
-        }
-        if(way=="conda"){
-            if(os=="linux" || os =="win"){
-                if(release=="stable")
-                    cmd = "conda install pytorch-cpu torchvision-cpu -c pytorch";
-                else
-                    cmd = "conda install pytorch-nightly-cpu -c pytorch";
-            }
-            if(os=="mac" ){
-                if(release=="stable")
-                    cmd = "conda install pytorch torchvision -c pytorch";
-                else
-                    cmd = "conda install pytorch-nightly -c pytorch";
-            }
-        }
-        if(way=="source"){
-            cmd="# Follow instructions at this URL: https://github.com/pytorch/pytorch#from-source";
         }
     }
 
+    if(ai=="prophet"){
+        if(way=="docker"){
+            cmd="Please refer to docker installation guide.";
+        }else{
+            if(os=="win"){
+                cmd="Please refer to windows installation guide.";
+            }else{
+                if(way=="pypi"){
+                    cmd="pip install bigdl-chronos; pip install prophet==1.1.0"
+                }
+            }
+        }
+    }
+
+    if(ai=="pmdarima"){
+        if(way=="docker"){
+            cmd="Please refer to docker installation guide.";
+        }else{
+            if(os=="win"){
+                cmd="Please refer to windows installation guide.";
+            }else{
+                if(way=="pypi"){
+                    cmd="pip install bigdl-chronos; pip install pmdarima"
+                }
+            }
+        }
+    }
     $("#cmd").html(cmd);
 }
 
@@ -144,6 +165,16 @@ function set_way(id){
     refresh_cmd();
 }
 
+function set_hardware(id){
+    hardware=id;
+    refresh_cmd();
+}
+
+function set_automl(id){
+    automl=id;
+    refresh_cmd();
+}
+
 $("button").click(function(){
     //alert($(this).attr("id")); 
     var id = $(this).attr("id");
@@ -160,6 +191,14 @@ $("button").click(function(){
 
     if (ways.indexOf(id)>=0){
         set_way(id);
+    }
+
+    if (hardwares.indexOf(id)>=0){
+        set_hardware(id);
+    }
+
+    if (automls.indexOf(id)>=0){
+        set_automl(id);
     }
 });
 

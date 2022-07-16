@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="neo.css" />
 <script src="js/jquery.min.js"></script>
   <title>
-    Intel AI
+    Chronos Installation Guide
   </title>
 
 </head>
@@ -16,27 +16,37 @@
 
 <body class="homepage">
     <div class="displayed">
-        <H style="margin:auto;font-size: 25px;">Intel Optimized AI Framework Installation</H>
+        <H style="margin:auto;font-size: 25px;">Chronos Installation Guide</H>
         <br>
         <br>
         <br>
     <table id="table-1" style="margin:auto">
         <thead>
             <th>AI Framework</th>
-            <th><button id="pytorch">PyTorch</button></th>
-            <th><button id="bigdl">BigDL</button></th>
-            <th><button id="mxnet">MXNet</button></th>
-            <th><button id="tensorflow">Tensorflow</button></th>            
-            <th><button id="caffe">Intel Caffe</button></th>
+            <th colspan="1"><button id="pytorch" title="Use PyTorch as deep learning models' backend. Most of the model support and works better under PyTorch.">PyTorch</br>(Recommended)</button></th>
+            <th colspan="1"><button id="tensorflow" title="Use Tensorflow as deep learning models' backend.">Tensorflow</button></th>
+            <th colspan="1"><button id="prophet" title="For Prophet model.">Prophet</button></th>
+            <th colspan="1"><button id="pmdarima" title="For ARIMA model.">pmdarima</button></th>
     </thead>
     <tbody>
-        <tr><td>OS</td><td colspan="2"><button id="linux">Linux</button></td><td colspan="2"><button id="win">Windows</button></td><td><button id="mac">MAC</button></td></tr>
 
-        <tr><td>Package</td><td colspan="2"><button id="conda">Conda</button></td><td colspan="2"><button id="pip">PIP</button></td><td><button id="source">Source</button></td></tr>
+        <tr><td>OS</td><td colspan="2"><button id="linux" title="Ubuntu/CentOS is recommended">Linux</button></td>
+                       <td colspan="2"><button id="win" title="WSL is needed for Windows users">Windows</button></td></tr>
 
-        <tr><td>Build</td><td colspan="3"><button id="stable">Stable</button></td><td colspan="2"><button id="nightly">Nightly</button></td></tr>
+        <tr><td>Auto Tuning</td><td colspan="2" title="I don't need any hyperparameter auto tuning feature."><button id="automlno">No need</button></td>
+                                <td colspan="2" title="I need chronos to help me tune the hyperparameters."><button id="automlyes">Needed</button></td></tr>
+                                
+
+        <tr><td>Hardware</td><td colspan="2"><button id="singlenode" title="For users use laptop/single node server.">Single node</button></td>
+                             <td colspan="2"><button id="cluster" title="For users use K8S/Yarn Cluster.">Cluster</button></td></tr>
         
-        <tr><td>Install CMD</td><td colspan="5"><div id="cmd" style="text-align: left;">NA</div></td></tr>
+        <tr><td>Release</td><td colspan="2"><button id="pypi" title="For users use laptop/single node server.">Pip</button></td>
+                            <td colspan="2"><button id="docker" title="For users use K8S/Yarn Cluster.">Docker</button></td></tr>
+
+        <tr><td>Build</td><td colspan="2"><button id="stable" title="For users would like to deploy chronos in their production">Stable (2.0.0)</button></td>
+                          <td colspan="2"><button id="nightly" title="For users would like to try chronos's latest feature">Nightly (2.1.0b)</button></td></tr>
+
+        <tr><td>Install CMD</td><td colspan="4"><div id="cmd" style="text-align: left;">NA</div></td></tr>
 </tbody>
     </table>
     </div>
